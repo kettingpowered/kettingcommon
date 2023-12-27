@@ -1,0 +1,15 @@
+dependencyResolutionManagement{
+    versionCatalogs {
+        libs {
+            version('asm', '9.6')
+            library('asm',          'org.ow2.asm', 'asm'         ).versionRef('asm')
+            library('asm-tree',     'org.ow2.asm', 'asm-tree'    ).versionRef('asm')
+            library('asm-util',     'org.ow2.asm', 'asm-util'    ).versionRef('asm')
+            library('asm-commons',  'org.ow2.asm', 'asm-commons' ).versionRef('asm')
+            library('asm-analysis', 'org.ow2.asm', 'asm-analysis').versionRef('asm')
+            bundle('asm', ['asm', 'asm-tree', 'asm-util', 'asm-commons', 'asm-analysis'])
+        }
+    }
+}
+
+rootProject.name = 'kettingcommon'

@@ -1,0 +1,73 @@
+import net.minecraftforge.gradleutils.PomUtils
+
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradleutils' version '2.3.5'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://nexus.c0d3m4513r.com/repository/Ketting/' }
+    maven { url = 'https://nexus.c0d3m4513r.com/repository/Forge/' }
+    mavenLocal()
+}
+
+dependencies {
+    compileOnly 'org.jetbrains:annotations:23.0.0'
+    api(libs.bundles.asm) // Needed by all the black magic
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    withSourcesJar()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << '-Xlint:-unchecked'
+}
+
+group = 'org.kettingpowered'
+version = System.getenv("VERSION") ?: 'dev-ver'
+
+publishing {
+    publications.register('mavenJava', MavenPublication).configure {
+        from components.java
+        artifactId = 'kettingcommon'
+        pom {
+            name = project.name
+            description = 'Version specific things needed in kettinglauncher and the server itself'
+            url = "https://github.com/kettingpowered/kettingcommon"
+            developers {
+                developer {
+                    id = "justred23"
+                    name = "JustRed23"
+                }
+                developer {
+                    id = "c0d3m4513r"
+                    name = "C0D3 M4513R"
+                }
+            }
+            PomUtils.setGitHubDetails(pom, 'kettingpowered', 'kettingcommon')
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/kettingpowered/kettingcommon")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+        maven {
+            name = 'kettingRepo'
+            credentials {
+                username = System.getenv("KETTINGUSERNAME")
+                password = System.getenv("KETTINGPASSWORD")
+            }
+            url = "https://nexus.c0d3m4513r.com/repository/Ketting/"
+        }
+    }
+}
