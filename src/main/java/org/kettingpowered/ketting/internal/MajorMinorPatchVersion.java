@@ -46,11 +46,11 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
     @Override
     public int compareTo(@NotNull MajorMinorPatchVersion<T> o) {
         int mjc = major.compareTo(o.major);
-        if (mjc!=0) return mjc;
+        if (mjc!=0 || minor==null) return mjc;
         int mnc = minor.compareTo(o.minor);
-        if (mnc!=0) return mnc;
+        if (mnc!=0 || patch==null) return mnc;
         int mpc = patch.compareTo(o.patch);
-        if (mpc!=0) return mpc;
+        if (mpc!=0 || other==null) return mpc;
         return other.compareTo(o.other);
     }
 
