@@ -2,11 +2,7 @@ package org.kettingpowered.ketting.internal;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -52,6 +48,19 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
         int mpc = patch.compareTo(o.patch);
         if (mpc!=0 || other==null || o.other == null) return mpc;
         return other.compareTo(o.other);
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if (o == null) return false;
+        else if (o == this) return true; 
+        else if (o instanceof MajorMinorPatchVersion<?> om){
+            if (!Objects.equals(major, om.major)) return false;
+            else if (!Objects.equals(minor, om.minor)) return false;
+            else if (!Objects.equals(patch, om.patch)) return false;
+            else return Objects.equals(other, om.other);
+        }
+        else return false;
     }
 
     public static HashMap<MajorMinorPatchVersion<Integer>, List<Tuple<MajorMinorPatchVersion<Integer>, MajorMinorPatchVersion<Integer>>>> parseKettingServerVersionList(Stream<String> versions){
