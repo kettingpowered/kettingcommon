@@ -16,25 +16,31 @@ import java.util.stream.Stream;
  * @param patch patch version
  * @param <T> version type
  */
-public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, T patch) implements Comparable<MajorMinorPatchVersion<T>> {
+public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, T patch, String other) implements Comparable<MajorMinorPatchVersion<T>> {
     public static MajorMinorPatchVersion<String> parse(String version){
         return parse(version, "\\.");
     }
     public static MajorMinorPatchVersion<String> parse(String version, String seperator){
-        String major, minor, patch;
-        String[] parts = version.split(seperator);
+        String major, minor, patch, other;
+        String[] parts = version.split(seperator, 4);
         if (parts.length>=1) major=parts[0];
         else throw new IllegalStateException("Split returned an empty array");
         if (parts.length>=2) minor = parts[1];
-        else minor="0";
+        else minor=null;
         if (parts.length>=3) patch = parts[2];
-        else patch="0";
-        return new MajorMinorPatchVersion<>(major, minor, patch);
+        else patch=null;
+        if (parts.length>=4) other = parts[3];
+        else other = null;
+        return new MajorMinorPatchVersion<>(major, minor, patch, other);
     }
     
     @Override
     public String toString(){
-        return String.format("%s.%s.%s", major, minor, patch);
+        String out = major.toString();
+        if (minor!=null) out+="."+minor;
+        if (patch!=null) out+="."+patch;
+        if (other!=null && !other.isEmpty()) out+="."+other;
+        return out;
     }
 
     @Override
@@ -43,19 +49,23 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
         if (mjc!=0) return mjc;
         int mnc = minor.compareTo(o.minor);
         if (mnc!=0) return mnc;
-        return patch.compareTo(o.patch);
+        int mpc = patch.compareTo(o.patch);
+        if (mpc!=0) return mpc;
+        return other.compareTo(o.other);
     }
 
     public static HashMap<MajorMinorPatchVersion<Integer>, List<Tuple<MajorMinorPatchVersion<Integer>, MajorMinorPatchVersion<Integer>>>> parseKettingServerVersionList(Stream<String> versions){
         HashMap<MajorMinorPatchVersion<Integer>, List<Tuple<MajorMinorPatchVersion<Integer>, MajorMinorPatchVersion<Integer>>>> map = versions.map(version -> MajorMinorPatchVersion.parse(version, "-"))
                 .map(version -> new MajorMinorPatchVersion<>(
-                        MajorMinorPatchVersion.parse(version.major()),//mc version
-                        MajorMinorPatchVersion.parse(version.minor()),//forge version
-                        MajorMinorPatchVersion.parse(version.patch())//Ketting version
+                        MajorMinorPatchVersion.parse(version.major),//mc version
+                        MajorMinorPatchVersion.parse(version.minor),//forge version
+                        MajorMinorPatchVersion.parse(version.patch),//Ketting version
+                        version.other
                 )).map(version->new MajorMinorPatchVersion<>(
-                        new MajorMinorPatchVersion<>(Integer.parseInt(version.major().major()), Integer.parseInt(version.major().minor()), Integer.parseInt(version.major().patch())),
-                        new MajorMinorPatchVersion<>(Integer.parseInt(version.minor().major()), Integer.parseInt(version.minor().minor()), Integer.parseInt(version.minor().patch())),
-                        new MajorMinorPatchVersion<>(Integer.parseInt(version.patch().major()), Integer.parseInt(version.patch().minor()), Integer.parseInt(version.patch().patch()))
+                        new MajorMinorPatchVersion<>(Integer.parseInt(version.major().major()), Integer.parseInt(version.major().minor()), Integer.parseInt(version.major().patch()), null),
+                        new MajorMinorPatchVersion<>(Integer.parseInt(version.minor().major()), Integer.parseInt(version.minor().minor()), Integer.parseInt(version.minor().patch()), null),
+                        new MajorMinorPatchVersion<>(Integer.parseInt(version.patch().major()), Integer.parseInt(version.patch().minor()), Integer.parseInt(version.patch().patch()), null),
+                        version.other
                 ))
                 .reduce(new HashMap<>(), (hm, mmp)->{
                     hm.computeIfAbsent(mmp.major(), (key)->new ArrayList<>()).add(new Tuple<>(mmp.minor(), mmp.patch()));
