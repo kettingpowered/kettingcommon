@@ -36,7 +36,7 @@ public class KettingFiles {
     public static final File KETTINGSERVER_BASE_DIR = new File(LIBRARIES_PATH, "org/kettingpowered/server");
     public static final File KETTINGSERVER_FORGE_DIR = new File(KettingFiles.KETTINGSERVER_BASE_DIR, "forge");
     public static final File INSTALL_DIR = new File(KETTINGSERVER_BASE_DIR, "install/");
-    public static final File MCP_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "de/oceanlabs/mcp_config/");
+    public static final File MCP_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "de/oceanlabs/mcp/mcp_config/");
     public static final File NMS_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "net/minecraft/server/");
 
     public static final File
