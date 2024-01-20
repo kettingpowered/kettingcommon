@@ -14,7 +14,7 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public final class JavaHacks {
     //Loads the union file system (and others) from the classpath
-    public static void loadExternalFileSystems(URLClassLoader loader) {
+    public static void loadExternalFileSystems(ClassLoader loader) {
         try {
             ServerInitHelper.addOpens("java.base", "java.nio.file.spi", "ALL-UNNAMED");
             List<String> knownSchemes = FileSystemProvider.installedProviders().stream().map(FileSystemProvider::getScheme).toList();
