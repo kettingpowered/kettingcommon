@@ -7,6 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.jar.JarFile;
 
+/**
+ * @author C0D3 M4513R
+ * @author JustRed32
+ */
+@SuppressWarnings("unused")
 public class KettingConstants {
     public static final String NAME = "Ketting";
     public static final String BRAND = "KettingPowered";

@@ -1,13 +1,17 @@
 package org.kettingpowered.ketting.internal;
 
 import java.io.File;
-import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @author C0D3 M4513R
+ * @author JustRed32
+ */
+@SuppressWarnings("unused")
 public class KettingFiles {
     public static final String DATA_DIR = "data/";
     public static final File MAIN_FOLDER_FILE;

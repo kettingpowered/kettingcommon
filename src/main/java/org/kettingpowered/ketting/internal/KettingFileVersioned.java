@@ -2,6 +2,11 @@ package org.kettingpowered.ketting.internal;
 
 import java.io.File;
 
+/**
+ * @author C0D3 M4513R
+ * @author JustRed32
+ */
+@SuppressWarnings("unused")
 public class KettingFileVersioned {
     private static final String
             MC = KettingConstants.MINECRAFT_VERSION,
