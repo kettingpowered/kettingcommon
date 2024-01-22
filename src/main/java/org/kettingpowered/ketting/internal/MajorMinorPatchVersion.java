@@ -3,6 +3,7 @@ package org.kettingpowered.ketting.internal;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -61,6 +62,15 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
             else return Objects.equals(other, om.other);
         }
         else return false;
+    }
+
+    public <O extends Comparable<O>> MajorMinorPatchVersion<O> convertMMP(Function<T,O> parser) {
+        return new MajorMinorPatchVersion<>(
+                parser.apply(major),
+                parser.apply(minor),
+                parser.apply(patch),
+                other
+        );
     }
 
     public static HashMap<MajorMinorPatchVersion<Integer>, List<Tuple<MajorMinorPatchVersion<Integer>, MajorMinorPatchVersion<Integer>>>> parseKettingServerVersionList(Stream<String> versions){
