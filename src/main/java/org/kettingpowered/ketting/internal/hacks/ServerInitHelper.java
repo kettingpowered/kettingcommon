@@ -6,7 +6,7 @@ import java.lang.invoke.MethodType;
 import java.util.List;
 import java.util.Objects;
 
-final class ServerInitHelper {
+public final class ServerInitHelper {
 
     private static final MethodHandles.Lookup IMPL_LOOKUP = Unsafe.lookup();
 

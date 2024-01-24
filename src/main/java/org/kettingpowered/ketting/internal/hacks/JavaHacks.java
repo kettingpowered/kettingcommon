@@ -1,7 +1,6 @@
 package org.kettingpowered.ketting.internal.hacks;
 
 import java.lang.reflect.Field;
-import java.net.URLClassLoader;
 import java.nio.file.spi.FileSystemProvider;
 import java.util.ArrayList;
 import java.util.List;
