@@ -106,12 +106,6 @@ public class ServerInitHelper {
         }
     }
 
-    public static void agentmain(final String a, final Instrumentation inst) {
-    }
-
-    public static void premain(String agentArgs, Instrumentation inst) {
-    }
-
     public static void addExports(String module, String pkg, String target) {
         if(target == null) target = "ALL-UNNAMED";
 
