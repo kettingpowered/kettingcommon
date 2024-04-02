@@ -14,7 +14,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class KettingFiles {
     public static final String DATA_DIR = "data/";
-    public static final File SERVER_JAR_DIR;
+    public static final File MAIN_FOLDER_FILE, SERVER_JAR_DIR;
     public static final File LAUNCH_DIR;
 
     static {
@@ -33,6 +33,7 @@ public class KettingFiles {
                 .getParentFile()//away with org
                 .getParentFile()//away with libraries
                 .getAbsoluteFile();
+        MAIN_FOLDER_FILE = SERVER_JAR_DIR;
 
         LAUNCH_DIR = new File(System.getProperty("user.dir"));
     }
