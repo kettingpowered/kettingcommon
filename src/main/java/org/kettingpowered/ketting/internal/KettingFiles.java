@@ -14,7 +14,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class KettingFiles {
     public static final String DATA_DIR = "data/";
-    public static final File MAIN_FOLDER_FILE;
+    public static final File SERVER_JAR_DIR;
+    public static final File LAUNCH_DIR;
 
     static {
         String path = KettingFiles.class.getProtectionDomain().getCodeSource().getLocation().getFile();
@@ -24,7 +25,7 @@ public class KettingFiles {
         int indexFile = path.indexOf(fileProto);
         if (indexFile>=0) path = path.substring(fileProto.length());
         path = URLDecoder.decode(path, StandardCharsets.UTF_8);
-        MAIN_FOLDER_FILE = new File(path)
+        SERVER_JAR_DIR = new File(path)
                 .getParentFile()//away with the kettingcore-version.jar
                 .getParentFile()//away with version folder
                 .getParentFile()//away with kettingcore
@@ -32,10 +33,12 @@ public class KettingFiles {
                 .getParentFile()//away with org
                 .getParentFile()//away with libraries
                 .getAbsoluteFile();
+
+        LAUNCH_DIR = new File(System.getProperty("user.dir"));
     }
-    public static final File LIBRARIES_DIR = new File(MAIN_FOLDER_FILE, KettingConstants.INSTALLER_LIBRARIES_FOLDER).getAbsoluteFile();
+    public static final File LIBRARIES_DIR = new File(SERVER_JAR_DIR, KettingConstants.INSTALLER_LIBRARIES_FOLDER).getAbsoluteFile();
     public static final String LIBRARIES_PATH = LIBRARIES_DIR.getAbsolutePath() + "/";
-    public static final String LOGS_PATH = new File(MAIN_FOLDER_FILE, "logs").getAbsolutePath() + "/";
+    public static final String LOGS_PATH = new File(LAUNCH_DIR, "logs").getAbsolutePath() + "/";
     public static final File FORGE_BASE_DIR = new File(LIBRARIES_PATH, "net/minecraftforge/");
     public static final File KETTINGSERVER_BASE_DIR = new File(LIBRARIES_PATH, "org/kettingpowered/server");
     public static final File KETTINGSERVER_FORGE_DIR = new File(KettingFiles.KETTINGSERVER_BASE_DIR, "forge");
@@ -44,6 +47,7 @@ public class KettingFiles {
     public static final File NMS_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "net/minecraft/server/");
 
     public static final File
+            SERVER_EULA = new File(LAUNCH_DIR, "eula.txt"),
             SERVER_LZMA = new File(INSTALL_DIR, "server.lzma"),
             STORED_HASHES = new File(INSTALL_DIR, "hashes.txt"),
             PATCHER_LOGS = new File(LOGS_PATH, "install.txt");
