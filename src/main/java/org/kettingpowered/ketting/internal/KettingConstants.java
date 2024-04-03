@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 
 /**
@@ -48,8 +49,13 @@ public class KettingConstants {
                 MC_FORGE_KETTING = MINECRAFT_VERSION + "-" + FORGE_VERSION + "-" + KETTING_VERSION,
                 FORGE_UNIVERSAL_NAME = "forge-" + MC_FORGE_KETTING + "-universal.jar";
         try (final JarFile jarFile = new JarFile(new File(KettingFiles.KETTINGSERVER_FORGE_DIR, MC_FORGE_KETTING + "/" + FORGE_UNIVERSAL_NAME))){
-            final String fullVersion = (String) jarFile.getManifest().getEntries().get("org/kettingpowered/ketting/").getValue("Implementation-Version");
-            MCP_VERSION = fullVersion.substring(fullVersion.lastIndexOf('-')+1);
+            final Attributes fullVersionAttribute = jarFile.getManifest().getEntries().get("org/kettingpowered/ketting/");
+            if (fullVersionAttribute != null) {
+                String fullVersion = fullVersionAttribute.getValue("Implementation-Version");
+                MCP_VERSION = fullVersion.substring(fullVersion.lastIndexOf('-')+1);
+            } else {
+                MCP_VERSION = jarFile.getManifest().getEntries().get("net/neoforged/neoforge/versions/neoform/").getValue("Implementation-Version").split("-")[1];
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
