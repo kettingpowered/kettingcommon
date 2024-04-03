@@ -43,6 +43,7 @@ public class KettingFiles {
     public static final File FORGE_BASE_DIR = new File(LIBRARIES_PATH, "net/minecraftforge/");
     public static final File KETTINGSERVER_BASE_DIR = new File(LIBRARIES_PATH, "org/kettingpowered/server");
     public static final File KETTINGSERVER_FORGE_DIR = new File(KettingFiles.KETTINGSERVER_BASE_DIR, "forge");
+    public static final File KETTINGSERVER_NEOFORGE_DIR = new File(KettingFiles.KETTINGSERVER_BASE_DIR, "neoforge");
     public static final File INSTALL_DIR = new File(KETTINGSERVER_BASE_DIR, "install/");
     public static final File MCP_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "de/oceanlabs/mcp/mcp_config/");
     public static final File NMS_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "net/minecraft/server/");
@@ -54,7 +55,11 @@ public class KettingFiles {
             PATCHER_LOGS = new File(LOGS_PATH, "install.txt");
     
     public static List<String> getKettingServerVersions(){
-        final File[] kettingVersions = KettingFiles.KETTINGSERVER_FORGE_DIR.listFiles(File::isDirectory);
+        return getKettingServerVersions(KETTINGSERVER_FORGE_DIR);
+    }
+
+    public static List<String> getKettingServerVersions(File dir){
+        final File[] kettingVersions = dir.listFiles(File::isDirectory);
         if (kettingVersions == null) return Collections.emptyList();
         return Arrays.stream(kettingVersions)
                 .map(File::getName)

@@ -35,13 +35,18 @@ public class KettingFileVersioned {
             MCLANGUAGE = new File(KettingFiles.KETTINGSERVER_BASE_DIR, "mclanguage/" + MC_FORGE_KETTING + "/" + MCLANGUAGE_NAME);
 
     public static final String
-            FORGE_UNIVERSAL_NAME = "forge-" + MC_FORGE_KETTING + "-universal.jar";
+            FORGE_UNIVERSAL_NAME = "forge-" + MC_FORGE_KETTING + "-universal.jar",
+            NEOFORGE_UNIVERSAL_NAME = "neoforge-" + MC_FORGE_KETTING + "-universal.jar";
 
     public static final File
             FORGE_UNIVERSAL_JAR = new File(KettingFiles.KETTINGSERVER_FORGE_DIR, MC_FORGE_KETTING + "/" + FORGE_UNIVERSAL_NAME),
             FORGE_PATCHED_JAR = new File(KettingFiles.KETTINGSERVER_FORGE_DIR, MC_FORGE_KETTING + "/forge-" + MC_FORGE_KETTING + "-server.jar"),
             FORGE_KETTING_LIBS = new File(KettingFiles.KETTINGSERVER_FORGE_DIR, MC_FORGE_KETTING + "/forge-" + MC_FORGE_KETTING + "-ketting-libraries.txt"),
             FORGE_INSTALL_JSON = new File(KettingFiles.KETTINGSERVER_FORGE_DIR, MC_FORGE_KETTING + "/forge-" + MC_FORGE_KETTING + "-installscript.json"),
+            NEOFORGE_UNIVERSAL_JAR = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/" + NEOFORGE_UNIVERSAL_NAME),
+            NEOFORGE_PATCHED_JAR = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-server.jar"),
+            NEOFORGE_KETTING_LIBS = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-ketting-libraries.txt"),
+            NEOFORGE_INSTALL_JSON = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-installscript.json"),
             MCP_ZIP = new File(MCP_BASE_DIR, "mcp_config-" + MC_MCP + ".zip"),
             SERVER_JAR = new File(NMS_BASE_DIR, "server-" + MC + ".jar"),
             SERVER_UNPACKED = new File(NMS_PATCHES_DIR, "server-" + MC_MCP + "-unpacked.jar"),
