@@ -27,6 +27,7 @@ public class KettingConstants {
     public static final String INSTALLER_LIBRARIES_FOLDER = "libraries";
     public static final String KETTING_GROUP = "org.kettingpowered";
     public static final String KETTINGSERVER_GROUP = KETTING_GROUP + ".server";
+    public static boolean NEOFORGE = false;
     static{
         HashMap<MajorMinorPatchVersion<Integer>, List<Tuple<MajorMinorPatchVersion<Integer>, MajorMinorPatchVersion<Integer>>>> map = MajorMinorPatchVersion.parseKettingServerVersionList(KettingFiles.getKettingServerVersions().stream());
         if (map.isEmpty()) throw new IllegalStateException("No Ketting Server Version found.");
@@ -55,6 +56,7 @@ public class KettingConstants {
                 MCP_VERSION = fullVersion.substring(fullVersion.lastIndexOf('-')+1);
             } else {
                 MCP_VERSION = jarFile.getManifest().getEntries().get("net/neoforged/neoforge/versions/neoform/").getValue("Implementation-Version").split("-")[1];
+                NEOFORGE = true;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
