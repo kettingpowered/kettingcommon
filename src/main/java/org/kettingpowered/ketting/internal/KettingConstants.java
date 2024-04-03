@@ -67,21 +67,12 @@ public class KettingConstants {
         BUKKIT_PACKAGE_VERSION = String.join("_", mcv);
         BUKKIT_VERSION = MINECRAFT_VERSION + "-R0.1-SNAPSHOT";
 
-        final String
-                MC_FORGE_KETTING = MINECRAFT_VERSION + "-" + FORGE_VERSION + "-" + KETTING_VERSION;
-        final String type_name = switch (TYPE) {
-            case Forge -> "forge";
-            case NeoForge -> "neoforge";
-            case Unknown -> throw new RuntimeException("Unsupported Type");
-        };
-        final String UNIVERSAL_NAME = type_name + "-" + MC_FORGE_KETTING + "-universal.jar";
-        final File dir = switch (TYPE) {
-            case Forge -> KettingFiles.KETTINGSERVER_FORGE_DIR;
-            case NeoForge -> KettingFiles.KETTINGSERVER_NEOFORGE_DIR;
-            case Unknown -> throw new RuntimeException("Unsupported Type");
-        };
+        final String MC_FORGE_KETTING = MINECRAFT_VERSION + "-" + FORGE_VERSION + "-" + KETTING_VERSION;
+        final String TYPE_NAME = TYPE.typeOrThrow();
+        final String UNIVERSAL_NAME = TYPE_NAME + "-" + MC_FORGE_KETTING + "-universal.jar";
+        final File INSTALL_DIR = TYPE.installDirOrThrow();
 
-        try (final JarFile jarFile = new JarFile(new File(dir, MC_FORGE_KETTING + "/" + UNIVERSAL_NAME))){
+        try (final JarFile jarFile = new JarFile(new File(INSTALL_DIR, MC_FORGE_KETTING + "/" + UNIVERSAL_NAME))){
             final String fullVersion = (String) jarFile.getManifest().getEntries().get("org/kettingpowered/ketting/").getValue("Implementation-Version");
             MCP_VERSION = fullVersion.substring(fullVersion.lastIndexOf('-')+1);
         } catch (IOException e) {
