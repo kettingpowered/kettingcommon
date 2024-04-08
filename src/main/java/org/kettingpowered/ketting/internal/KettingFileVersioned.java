@@ -16,6 +16,7 @@ public class KettingFileVersioned {
             MC_FORGE_KETTING = MC + "-" + FORGE + "-" + KettingConstants.KETTING_VERSION,
             MC_MCP = MC + "-" + MCP;
     public static final File MCP_BASE_DIR = new File(KettingFiles.MCP_BASE_DIR, MC_MCP + "/");
+    public static final File NEOFORM_MCP_BASE_DIR = new File(KettingFiles.NEOFORM_MCP_BASE_DIR, MC_MCP + "/");
     public static final File NMS_BASE_DIR = new File(KettingFiles.NMS_BASE_DIR, MC + "/");
     public static final File NMS_PATCHES_DIR = new File(KettingFiles.NMS_BASE_DIR, MC_MCP + "/");
 
@@ -47,6 +48,7 @@ public class KettingFileVersioned {
             NEOFORGE_PATCHED_JAR = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-server.jar"),
             NEOFORGE_KETTING_LIBS = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-ketting-libraries.txt"),
             NEOFORGE_INSTALL_JSON = new File(KettingFiles.KETTINGSERVER_NEOFORGE_DIR, MC_FORGE_KETTING + "/neoforge-" + MC_FORGE_KETTING + "-installscript.json"),
+            NEOFORM_MCP_ZIP = new File(NEOFORM_MCP_BASE_DIR, "neoform-" + MC_MCP + ".zip"),
             MCP_ZIP = new File(MCP_BASE_DIR, "mcp_config-" + MC_MCP + ".zip"),
             SERVER_JAR = new File(NMS_BASE_DIR, "server-" + MC + ".jar"),
             SERVER_UNPACKED = new File(NMS_PATCHES_DIR, "server-" + MC_MCP + "-unpacked.jar"),
