@@ -48,6 +48,7 @@ public class KettingFiles {
     public static final File MCP_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "de/oceanlabs/mcp/mcp_config/");
     public static final File NEOFORM_MCP_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "net/neoforged/neoform/");
     public static final File NMS_BASE_DIR = new File(KettingFiles.LIBRARIES_PATH, "net/minecraft/server/");
+    public static final File FANCY_MOD_LOADER_DIR = new File(LIBRARIES_PATH, "net/neoforged/fancymodloader/loader");
 
     public static final File
             SERVER_EULA = new File(LAUNCH_DIR, "eula.txt"),
