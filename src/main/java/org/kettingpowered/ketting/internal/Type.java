@@ -35,4 +35,12 @@ public enum Type {
         if (this == Unknown) throw new IllegalStateException("Unknown modloader type");
         return installDir;
     }
+
+    public File installJsonOrThrow() {
+        return switch (KettingConstants.TYPE) {
+            case Forge -> KettingFileVersioned.FORGE_INSTALL_JSON;
+            case NeoForge -> KettingFileVersioned.NEOFORGE_INSTALL_JSON;
+            default -> throw new IllegalStateException("Unknown modloader type");
+        };
+    }
 }
