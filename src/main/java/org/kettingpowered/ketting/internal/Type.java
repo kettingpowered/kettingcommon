@@ -51,4 +51,12 @@ public enum Type {
             default -> throw new IllegalStateException("Unknown modloader type");
         };
     }
+
+    public File patchedJarOrThrow() {
+        return switch (KettingConstants.TYPE) {
+            case Forge -> KettingFileVersioned.FORGE_PATCHED_JAR;
+            case NeoForge -> KettingFileVersioned.NEOFORGE_PATCHED_JAR;
+            default -> throw new IllegalStateException("Unknown modloader type");
+        };
+    }
 }
