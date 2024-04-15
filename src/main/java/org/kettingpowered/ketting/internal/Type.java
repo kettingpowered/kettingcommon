@@ -59,4 +59,20 @@ public enum Type {
             default -> throw new IllegalStateException("Unknown modloader type");
         };
     }
+
+    public File universalJarOrThrow() {
+        return switch (KettingConstants.TYPE) {
+            case Forge -> new File(KettingFiles.KETTINGSERVER_FORGE_DIR, versionOrThrow() + "/forge-" + versionOrThrow() + "-universal.jar");
+            case NeoForge -> new File(KettingFiles.NEOFORGE_DIR, versionOrThrow() + "/neoforge-" + versionOrThrow() + "-universal.jar");
+            default -> throw new IllegalStateException("Unknown modloader type");
+        };
+    }
+
+    public String versionOrThrow() {
+        return switch (KettingConstants.TYPE) {
+            case Forge -> KettingConstants.MINECRAFT_VERSION + "-" + KettingConstants.FORGE_VERSION + "-" + KettingConstants.KETTING_VERSION;
+            case NeoForge -> KettingConstants.FORGE_VERSION;
+            default -> throw new IllegalStateException("Unknown modloader type");
+        };
+    }
 }

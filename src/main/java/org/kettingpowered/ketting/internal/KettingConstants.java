@@ -67,12 +67,7 @@ public class KettingConstants {
         BUKKIT_PACKAGE_VERSION = String.join("_", mcv);
         BUKKIT_VERSION = MINECRAFT_VERSION + "-R0.1-SNAPSHOT";
 
-        final String MC_FORGE_KETTING = MINECRAFT_VERSION + "-" + FORGE_VERSION + "-" + KETTING_VERSION;
-        final String TYPE_NAME = TYPE.typeOrThrow();
-        final String UNIVERSAL_NAME = TYPE_NAME + "-" + MC_FORGE_KETTING + "-universal.jar";
-        final File INSTALL_DIR = TYPE.installDirOrThrow();
-
-        try (final JarFile jarFile = new JarFile(new File(INSTALL_DIR, MC_FORGE_KETTING + "/" + UNIVERSAL_NAME))){
+        try (final JarFile jarFile = new JarFile(TYPE.universalJarOrThrow())){
             final String fullVersion = (String) jarFile.getManifest().getEntries().get("org/kettingpowered/ketting/").getValue("Implementation-Version");
             MCP_VERSION = fullVersion.substring(fullVersion.lastIndexOf('-')+1);
         } catch (IOException e) {
