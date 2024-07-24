@@ -81,7 +81,7 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
                         MajorMinorPatchVersion.parse(version.patch),//Ketting version
                         version.other
                 )).map(version->new MajorMinorPatchVersion<>(
-                        new MajorMinorPatchVersion<>(Integer.parseInt(version.major().major()), Integer.parseInt(version.major().minor()), Integer.parseInt(version.major().patch()), null),
+                        new MajorMinorPatchVersion<>(Integer.parseInt(version.major().major()), Integer.parseInt(version.major().minor()), version.major().patch() == null ? null : Integer.parseInt(version.major().patch()), null),
                         new MajorMinorPatchVersion<>(Integer.parseInt(version.minor().major()), Integer.parseInt(version.minor().minor()), Integer.parseInt(version.minor().patch()), null),
                         new MajorMinorPatchVersion<>(Integer.parseInt(version.patch().major()), Integer.parseInt(version.patch().minor()), Integer.parseInt(version.patch().patch()), null),
                         version.other
