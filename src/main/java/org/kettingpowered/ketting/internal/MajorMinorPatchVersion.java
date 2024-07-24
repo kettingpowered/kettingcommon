@@ -17,9 +17,9 @@ public record MajorMinorPatchVersion<T extends Comparable<T>>(T major, T minor, 
     public static MajorMinorPatchVersion<String> parse(String version){
         return parse(version, "\\.");
     }
-    public static MajorMinorPatchVersion<String> parse(String version, String seperator){
+    public static MajorMinorPatchVersion<String> parse(String version, String separator){
         String major, minor, patch, other;
-        String[] parts = version.split(seperator, 4);
+        String[] parts = version.split(separator, 4);
         if (parts.length>=1) major=parts[0];
         else throw new IllegalStateException("Split returned an empty array");
         if (parts.length>=2) minor = parts[1];
